@@ -116,6 +116,11 @@ public class Cep extends JFrame {
 		contentPane.add(cboUf);
 
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpaTela();
+			}
+		});
 		btnLimpar.setBounds(10, 227, 89, 23);
 		contentPane.add(btnLimpar);
 
@@ -177,6 +182,7 @@ public class Cep extends JFrame {
 			Element root = documento.getRootElement();
 			for (Iterator<Element> it = root.elementIterator(); it.hasNext();) {
 				Element element = it.next();
+
 				if (element.getQualifiedName().equals("cidade")) {
 					txtCidade.setText(element.getText());
 
@@ -207,9 +213,7 @@ public class Cep extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(null, "CEP não encontrado");
 					}
-
 				}
-
 			}
 			// setar o campo endereco
 			txtEndereco.setText(tipoLogradouro + " : " + logradouro);
@@ -217,6 +221,14 @@ public class Cep extends JFrame {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+
+	private void limpaTela() {
+		txtBairro.setText("");
+		txtCep.setText("");
+		txtCidade.setText("");
+		txtEndereco.setText("");
+		lblCheck.setIcon(null);
 
 	}
 }
